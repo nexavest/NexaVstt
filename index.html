@@ -15,96 +15,97 @@
 
 body {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   font-family: Arial, sans-serif;
+  background: #111;
   color: white;
-  background: url("fon.jpg") center/cover no-repeat;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
+  text-align: center;
+  padding: 25px 15px;
 }
 
 .contenido {
-  position: relative;
-  z-index: 2;
-  width: 90%;
-  max-width: 650px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.imagen {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  display: block;
+  margin: 0 auto 25px auto;
 }
 
 .titulo {
-  font-size: 45px;
+  font-size: 40px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .owner {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
 .nombre {
-  font-size: 35px;
+  font-size: 32px;
   font-weight: bold;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
 .contador {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .caja {
-  min-width: 105px;
-  padding: 20px 12px;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.35);
-  backdrop-filter: blur(8px);
+  min-width: 100px;
+  padding: 18px 10px;
+  border-radius: 12px;
+  background: #222;
+  border: 1px solid #555;
 }
 
 .numero {
   display: block;
-  font-size: 42px;
+  font-size: 40px;
   font-weight: bold;
 }
 
 .etiqueta {
   display: block;
-  margin-top: 6px;
+  margin-top: 5px;
   font-size: 13px;
   text-transform: uppercase;
 }
 
 .terminado {
   display: none;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: bold;
   margin-top: 25px;
 }
 
 @media (max-width: 500px) {
+  .imagen {
+    width: 140px;
+    height: 140px;
+  }
 
   .titulo {
-    font-size: 31px;
+    font-size: 30px;
   }
 
   .nombre {
-    font-size: 28px;
+    font-size: 27px;
   }
 
   .caja {
     min-width: 85px;
-    padding: 15px 8px;
   }
 
   .numero {
@@ -118,17 +119,13 @@ body::before {
 
 <div class="contenido">
 
-  <div class="titulo">
-    Cuenta Regresiva
-  </div>
+  <img src="fon.jpg" class="imagen" alt="Imagen">
 
-  <div class="owner">
-    BONUS OWNER
-  </div>
+  <div class="titulo">Cuenta Regresiva</div>
 
-  <div class="nombre">
-    Melany Bajana
-  </div>
+  <div class="owner">BONUS OWNER</div>
+
+  <div class="nombre">Melany Bajana</div>
 
   <div class="contador" id="contador">
 
@@ -157,41 +154,7 @@ body::before {
 
 <script>
 
-let tiempo = 3 * 60 * 60;
+// La cuenta regresiva se guarda en el navegador
+const CLAVE = "cuenta_regresiva_melany";
 
-function actualizar() {
-
-  let horas = Math.floor(tiempo / 3600);
-  let minutos = Math.floor((tiempo % 3600) / 60);
-  let segundos = tiempo % 60;
-
-  document.getElementById("horas").textContent =
-    String(horas).padStart(2, "0");
-
-  document.getElementById("minutos").textContent =
-    String(minutos).padStart(2, "0");
-
-  document.getElementById("segundos").textContent =
-    String(segundos).padStart(2, "0");
-
-  if (tiempo <= 0) {
-
-    clearInterval(cuentaRegresiva);
-
-    document.getElementById("contador").style.display = "none";
-    document.getElementById("terminado").style.display = "block";
-
-    return;
-  }
-
-  tiempo--;
-}
-
-actualizar();
-
-const cuentaRegresiva = setInterval(actualizar, 1000);
-
-</script>
-
-</body>
-</html>
+// Comprobar si
