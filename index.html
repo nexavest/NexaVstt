@@ -154,7 +154,61 @@ body {
 
 <script>
 
-// La cuenta regresiva se guarda en el navegador
-const CLAVE = "cuenta_regresiva_melany";
+// Nombre utilizado para guardar la cuenta regresiva
+const CLAVE = "melany_bajana_cuenta_regresiva";
 
-// Comprobar si
+// Buscar una cuenta existente
+let horaFinal = localStorage.getItem(CLAVE);
+
+// Si no existe, crearla ahora con 3 horas
+if (horaFinal === null) {
+    horaFinal = Date.now() + (3 * 60 * 60 * 1000);
+    localStorage.setItem(CLAVE, horaFinal);
+}
+
+horaFinal = Number(horaFinal);
+
+function actualizarContador() {
+
+    const ahora = Date.now();
+    const restante = horaFinal - ahora;
+
+    if (restante <= 0) {
+
+        document.getElementById("horas").textContent = "00";
+        document.getElementById("minutos").textContent = "00";
+        document.getElementById("segundos").textContent = "00";
+
+        document.getElementById("contador").style.display = "none";
+        document.getElementById("terminado").style.display = "block";
+
+        clearInterval(intervalo);
+        return;
+    }
+
+    const segundosTotales = Math.floor(restante / 1000);
+
+    const horas = Math.floor(segundosTotales / 3600);
+    const minutos = Math.floor((segundosTotales % 3600) / 60);
+    const segundos = segundosTotales % 60;
+
+    document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+
+    document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+
+    document.getElementById("segundos").textContent =
+        String(segundos).padStart(2, "0");
+}
+
+// Crear el intervalo ANTES de actualizar
+const intervalo = setInterval(actualizarContador, 1000);
+
+// Mostrar el tiempo inmediatamente
+actualizarContador();
+
+</script>
+
+</body>
+</html>
